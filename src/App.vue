@@ -1,5 +1,14 @@
 <template>
-  <header>
-    <div class="p-10">11 1111111111111</div>
-  </header>
+  <main-nav />
 </template>
+
+<script>
+import MainNav from "@/components/MainNav.vue";
+
+export default {
+  name: "App",
+  components: {
+    MainNav,
+  },
+};
+</script>
