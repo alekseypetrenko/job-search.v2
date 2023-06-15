@@ -14,14 +14,26 @@
             </li>
           </ul>
         </nav>
+
+        <div class="ml-auto flex h-full items-center">
+          <profile-image v-if="isLoggedIn" />
+          <action-button v-else @click="loginUser" />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "./ActionButton.vue";
+import ProfileImage from "./ProfileImage.vue";
+
 export default {
   name: "MainNav",
+  components: {
+    ActionButton,
+    ProfileImage,
+  },
   data() {
     return {
       company: "Google",
@@ -33,7 +45,13 @@ export default {
         "Students",
         "Jobs",
       ],
+      isLoggedIn: false,
     };
+  },
+  methods: {
+    loginUser() {
+      this.isLoggedIn = true;
+    },
   },
 };
 </script>
