@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/vue";
 import TheHeadline from "@/components/TheHeadline.vue";
+import { nextTick } from "vue";
 
 describe("TheHeadline", () => {
   it("displays introductory action verb", () => {
@@ -22,5 +23,19 @@ describe("TheHeadline", () => {
 
     expect(mock).toHaveBeenCalled();
     vi.useRealTimers();
+  });
+
+  it("swaps action verb after interval", async () => {
+    vi.useFakeTimers();
+    render(TheHeadline);
+
+    vi.advanceTimersToNextTimer();
+    await nextTick();
+
+    const actionPhrase = screen.getByRole("heading", {
+      name: /create for everyone/i,
+    });
+
+    expect(actionPhrase).toBeInTheDocument();
   });
 });
