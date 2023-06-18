@@ -3,8 +3,15 @@ import TheHeadline from "@/components/TheHeadline.vue";
 import { nextTick } from "vue";
 
 describe("TheHeadline", () => {
-  it("displays introductory action verb", () => {
+  beforeEach(() => {
     vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("displays introductory action verb", () => {
     render(TheHeadline);
 
     const actionPhrase = screen.getByRole("heading", {
@@ -12,21 +19,17 @@ describe("TheHeadline", () => {
     });
 
     expect(actionPhrase).toBeInTheDocument();
-    vi.useRealTimers();
   });
 
   it("changes action verb at a consistent interval", () => {
-    vi.useFakeTimers();
     const mock = vi.fn();
     vi.stubGlobal("setInterval", mock);
     render(TheHeadline);
 
     expect(mock).toHaveBeenCalled();
-    vi.useRealTimers();
   });
 
   it("swaps action verb after interval", async () => {
-    vi.useFakeTimers();
     render(TheHeadline);
 
     vi.advanceTimersToNextTimer();
@@ -37,5 +40,15 @@ describe("TheHeadline", () => {
     });
 
     expect(actionPhrase).toBeInTheDocument();
+  });
+
+  it("removes interval when component disappears", () => {
+    const clearInterval = vi.fn();
+    vi.stubGlobal("clearInterval", clearInterval);
+
+    const { unmount } = render(TheHeadline);
+    unmount();
+    expect(clearInterval).toHaveBeenCalled();
+    vi.unstubAllGlobals();
   });
 });
