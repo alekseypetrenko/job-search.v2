@@ -1,7 +1,6 @@
 <template>
   <main-nav />
   <the-hero />
-  <div>11</div>
 </template>
 
 <script>
