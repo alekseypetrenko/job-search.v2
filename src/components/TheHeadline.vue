@@ -14,7 +14,6 @@ import nextElementInList from "@/utils/nextElementInList";
 
 export default {
   name: "TheHeadline",
-  components: {},
   data() {
     return {
       action: "Build",
