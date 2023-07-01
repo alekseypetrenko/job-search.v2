@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <section class="mb-20">
     <h1 class="mb-14 text-8xl font-bold tracking-tighter">
       <span :class="actionClasses">{{ action }}</span>
       <br />
       for everyone
     </h1>
     <h2 class="text-3xl font-light">Find your next job at Google com.</h2>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -14,7 +14,6 @@ import nextElementInList from "@/utils/nextElementInList";
 
 export default {
   name: "TheHeadline",
-  components: {},
   data() {
     return {
       action: "Build",
