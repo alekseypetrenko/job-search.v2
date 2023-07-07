@@ -1,6 +1,5 @@
 <template>
-  <main-nav />
-  <the-hero />
+  <router-view />
 </template>
 
 <script>
