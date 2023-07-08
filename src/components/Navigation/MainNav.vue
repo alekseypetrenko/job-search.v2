@@ -12,7 +12,11 @@
               v-for="item in menuItems"
               :key="item"
               class="ml-9 h-full first:ml-0">
-              <a class="flex h-full items-center py-2.5" href="/">{{ item }}</a>
+              <router-link
+                class="flex h-full items-center py-2.5"
+                :to="item.url"
+                >{{ item.text }}</router-link
+              >
             </li>
           </ul>
         </nav>
@@ -43,12 +47,12 @@ export default {
   data() {
     return {
       menuItems: [
-        "Teams",
-        "Location",
-        "Life at Google",
-        "How we hire",
-        "Students",
-        "Jobs",
+        { text: "Teams", url: "/" },
+        { text: "Location", url: "/" },
+        { text: "Life at Google", url: "/" },
+        { text: "How we hire", url: "/" },
+        { text: "Students", url: "/" },
+        { text: "Jobs", url: "/jobs/results" },
       ],
       isLoggedIn: false,
     };
