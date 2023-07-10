@@ -2,40 +2,38 @@ import { render, screen } from "@testing-library/vue";
 import TheSubNav from "@/components/Navigation/TheSubNav.vue";
 
 describe("TheSubNav", () => {
-  describe("when the user on the jobs page", () => {
-    it("displays job count", () => {
-      render(TheSubNav, {
-        global: {
-          stubs: {
-            FontAwesomeIcon: true,
+  const renderTheSubNav = (routeName) => {
+    render(TheSubNav, {
+      global: {
+        mocks: {
+          $route: {
+            name: routeName,
           },
         },
-        data() {
-          return {
-            onJobResultsPage: true,
-          };
+        stubs: {
+          FontAwesomeIcon: true,
         },
-      });
+      },
+    });
+  };
+
+  describe("when the user on the jobs page", () => {
+    it("displays job count", () => {
+      const routeName = "JobResults";
+
+      renderTheSubNav(routeName);
 
       const jobCount = screen.getByText("1653");
       expect(jobCount).toBeInTheDocument();
     });
   });
 
-  describe("when the user on the jobs page", () => {
+  describe("when the user is not on the jobs page", () => {
     it("does not display job count", () => {
-      render(TheSubNav, {
-        global: {
-          stubs: {
-            FontAwesomeIcon: true,
-          },
-        },
-        data() {
-          return {
-            onJobResultsPage: false,
-          };
-        },
-      });
+      const routeName = "HomeView";
+
+      renderTheSubNav(routeName);
+
       const jobCount = screen.queryByText("1653");
       expect(jobCount).not.toBeInTheDocument();
     });
