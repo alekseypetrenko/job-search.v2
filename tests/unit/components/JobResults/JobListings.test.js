@@ -5,9 +5,14 @@ import axios from "axios";
 vi.mock("axios");
 
 describe("JobListings", () => {
-  it("fetches jobs", () => {
-    axios.get.mockResolvedValue({ data: [] });
-    const $route = { query: { page: "5" } };
+  const createRoute = (queryParams) => ({
+    query: {
+      page: "5",
+      ...queryParams,
+    },
+  });
+
+  const renderJobListings = ($route) => {
     render(JobListings, {
       global: {
         stubs: {
@@ -18,24 +23,19 @@ describe("JobListings", () => {
         },
       },
     });
+  };
+
+  it("fetches jobs", () => {
+    axios.get.mockResolvedValue({ data: [] });
+    const $route = createRoute();
+    renderJobListings($route);
     expect(axios.get).toHaveBeenCalledWith("http://localhost:3000/jobs");
   });
 
   it("it displayes max of 10 jobs", async () => {
     axios.get.mockResolvedValue({ data: Array(15).fill({}) });
-    const $route = { query: { page: "1" } };
-
-    render(JobListings, {
-      global: {
-        stubs: {
-          "router-link": RouterLinkStub,
-        },
-        mocks: {
-          $route,
-        },
-      },
-    });
-
+    const $route = createRoute({ page: "1" });
+    renderJobListings($route);
     const jobListings = await screen.findAllByRole("listitem");
     expect(jobListings).toHaveLength(10);
   });
