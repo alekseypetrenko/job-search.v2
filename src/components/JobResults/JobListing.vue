@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     jobPageLink() {
-      return `./jobs/results/${this.job.id}`;
+      return `/jobs/results/${this.job.id}`;
     },
   },
 };
