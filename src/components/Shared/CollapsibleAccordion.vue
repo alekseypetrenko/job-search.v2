@@ -7,7 +7,9 @@
       <h3 class="text-base font-semibold">{{ header }}</h3>
       <font-awesome-icon :icon="caretIcon" />
     </div>
-    <div v-if="isOpen" class="mt-5 w-full"><slot /></div>
+    <div v-if="isOpen" class="mt-5 w-full">
+      <slot>Whoops, somebody forget to populate me</slot>
+    </div>
   </div>
 </template>
 
