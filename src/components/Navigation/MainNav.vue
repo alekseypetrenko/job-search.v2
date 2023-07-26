@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       menuItems: [
-        { text: "Teams", url: "/" },
+        { text: "Teams", url: "/teams" },
         { text: "Location", url: "/" },
         { text: "Life at Google", url: "/" },
         { text: "How we hire", url: "/" },
