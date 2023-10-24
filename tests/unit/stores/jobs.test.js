@@ -1,4 +1,5 @@
 import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/user";
 import { createPinia, setActivePinia } from "pinia";
 import axios from "axios";
 
@@ -40,6 +41,21 @@ describe("getters", () => {
   describe("UNIQUE_ORGANIZATIONS", () => {
     it("finds uniq organizations from the jobs store", () => {
       const store = useJobsStore();
+      store.jobs = [
+        { organization: "google" },
+        { organization: "google" },
+        { organization: "amazon" },
+      ];
+      const result = store.UNIQUE_ORGANIZATIONS;
+
+      expect(result).toEqual(new Set(["google", "amazon"]));
+    });
+  });
+
+  describe("FILTERED_JOBS_BY_ORGANIZATION", () => {
+    it("identified jobs that are associated with the given organizations", () => {
+      const store = useJobsStore();
+      const user = useUserStore();
       store.jobs = [
         { organization: "google" },
         { organization: "google" },

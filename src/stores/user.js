@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-const ADD_SELECTED_ORGANIZATIONS = "ADD_SELECTED_ORGANIZATIONS";
+export const ADD_SELECTED_ORGANIZATIONS = "ADD_SELECTED_ORGANIZATIONS";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
