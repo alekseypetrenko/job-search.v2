@@ -54,16 +54,21 @@ describe("getters", () => {
 
   describe("FILTERED_JOBS_BY_ORGANIZATION", () => {
     it("identified jobs that are associated with the given organizations", () => {
-      const store = useJobsStore();
-      const user = useUserStore();
-      store.jobs = [
+      const jobStore = useJobsStore();
+      const userStore = useUserStore();
+      jobStore.jobs = [
         { organization: "google" },
-        { organization: "google" },
+        { organization: "yahoo" },
         { organization: "amazon" },
       ];
-      const result = store.UNIQUE_ORGANIZATIONS;
 
-      expect(result).toEqual(new Set(["google", "amazon"]));
+      userStore.selectedOrganizations = ["yahoo", "google"];
+      const result = jobStore.FILTERED_JOBS_BY_ORGANIZATIONS;
+
+      expect(result).toEqual([
+        { organization: "google" },
+        { organization: "yahoo" },
+      ]);
     });
   });
 });
