@@ -70,5 +70,23 @@ describe("getters", () => {
         { organization: "yahoo" },
       ]);
     });
+
+    it("return all jobs if user does not select any jobs", () => {
+      const jobStore = useJobsStore();
+      const userStore = useUserStore();
+      jobStore.jobs = [
+        { organization: "google" },
+        { organization: "yahoo" },
+        { organization: "amazon" },
+      ];
+
+      userStore.selectedOrganizations = [];
+      const result = jobStore.FILTERED_JOBS_BY_ORGANIZATIONS;
+      expect(result).toEqual([
+        { organization: "google" },
+        { organization: "yahoo" },
+        { organization: "amazon" },
+      ]);
+    });
   });
 });
